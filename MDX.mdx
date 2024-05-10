@@ -1,0 +1,71 @@
+
+/*The total number of cancelled and returned orders */
+
+/*WITH MEMBER [Measures].[Total Count] AS
+    Sum(
+        Filter(
+            [Courier Status].[Courier Status PK].MEMBERS,
+            [Courier Status].[Courier Status].CurrentMember.Name = "cancelled" OR [Courier Status].[Courier Status].CurrentMember.Name = "unshipped"
+        ),
+        [Measures].[Quantity]
+    )
+	
+SELECT
+    {[Measures].[Total Count], [Measures].[Total Count] } ON COLUMNS,
+    { [Courier Status].[Courier Status].&[Cancelled], [Courier Status].[Courier Status].&[Unshipped]}  ON ROWS
+FROM [Sales Report Aamazone Database]*/
+
+/*he average order amount by customer type */
+
+/* 
+select [New Customer Types].[Customer Type].members as Customer_Type on columns,
+[Measures].[average_Price_product] on rows 
+from [Sales Report Aamazone Database]
+/*
+
+the price according to the size
+
+*/
+select [New Dim Product].[Size].members  on rows ,
+[Measures].[Price_payed]on columns 
+from [Sales Report Aamazone Database]
+*/
+
+/*the price according to the order ID */
+
+/*select[order dim].[Order ID].members on rows ,
+[Measures].[Price_payed] on columns 
+from [Sales Report Aamazone Database]
+*/
+
+/*The revenue  by the product category*/
+/*select [Measures].[Price_payed] as revenue_product_category  on columns,
+[New Dim Product].[Category].members as Category on rows 
+from [Sales Report Aamazone Database]*/
+
+/*The top 5 product categories by average price in dollars*/
+
+
+/*SELECT
+TOPCOUNT(
+    EXCEPT(
+        [New Dim Product].[Category].Members,
+        {[New Dim Product].[Category].[All], [New Dim Product].[Category].[Unknown]}
+    ), 
+    5, 
+    [Measures].[average_Price_product]
+) ON ROWS,
+{ [Measures].[average_Price_product] } ON COLUMNS
+FROM [Sales Report Aamazone Database]*/
+/*SELECT
+TOPCOUNT(
+    EXCEPT(
+        [New Dim Product].[Category].Members,
+        {[New Dim Product].[Category].[All], [New Dim Product].[Category].[Unknown]}
+    ), 
+    5, 
+    [Measures].[average_Price_product]
+) ON ROWS,
+{ [Measures].[average_Price_product] } ON COLUMNS
+FROM [Sales Report Aamazone Database]*/
+
